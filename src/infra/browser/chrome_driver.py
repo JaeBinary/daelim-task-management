@@ -15,7 +15,7 @@ def build_driver(settings: Settings) -> WebDriver:
     """Chrome WebDriver 생성 및 기본 설정 적용"""
 
     # ChromeDriver 서비스 구성 (Path 객체를 문자열로 변환)
-    service = Service(executable_path=fspath(settings.chrome_driver_path))
+    service = Service()
 
     # Chrome 옵션 구성 (자동화 배너, 로그 메시지 숨김 및 창 최대화)
     options = Options()

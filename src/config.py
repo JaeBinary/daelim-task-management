@@ -15,7 +15,6 @@ class Settings:
     url: str
     user_id: str
     user_pw: str
-    chrome_driver_path: Path
     spreadsheet_id: str
     credentials_path: Path
     notion_token: str
@@ -30,7 +29,6 @@ def load_settings() -> Settings:
         url=os.getenv("URL", "").strip(),
         user_id=os.getenv("USER_ID", "").strip(),
         user_pw=os.getenv("USER_PW", "").strip(),
-        chrome_driver_path=Path(os.getenv("CHROME_DRIVER_PATH", "drivers/chromedriver.exe")).resolve(),
         spreadsheet_id=os.getenv("SPREADSHEET_ID","").strip(),
         credentials_path=Path(os.getenv("CREDENTIALS_PATH", "credentials/credentials.json")).resolve(),
         notion_token=os.getenv("NOTION_TOKEN", "").strip(),
