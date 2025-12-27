@@ -16,7 +16,7 @@ def scrape_inbox(driver) -> list:
         EC.presence_of_element_located((By.NAME, "right"))
     )
     driver.switch_to.frame(frame)
-    print("☑️  [진입] right 프레임")
+    #print("☑️  [진입] right 프레임")
 
     # 추출할 날짜 입력
     while True:
@@ -50,7 +50,13 @@ def scrape_inbox(driver) -> list:
 
             # 문서 정보 추출
             data1 = row.get_attribute("data1")
+            data2 = row.get_attribute("data2")
             data7 = row.get_attribute("data7")
+
+            # 회송된 문서는 제외
+            if data2 == "2":
+                continue
+
             url = f"https://gw.daelim.ac.kr/ezApprovalG/recevGSusin.do?docID={data1}&draftFlag=SUSIN&uOrgID={data7}"
             img = f"https://gw.daelim.ac.kr/fileroot/0/files/upload_common/{datetime.today().strftime('%Y%m%d')}/{data1}.png"
             docTitle = cells[1].text.strip()
