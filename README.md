@@ -1,9 +1,11 @@
-# 개요
+# 학과 업무 관리 자동화 시스템
+
+## 개요
 교내 그룹웨어의 수신접수함에서 협조전 문서를 자동으로 수집하여 `Google Sheets`와 `Notion DB`에 연동하는 **업무 리스트업** 프로그램입니다.
 
 <br>
 
-## 📋 목차
+### 📋 목차
 
 - [주요 기능](#-주요-기능-)
 - [사용 기술 및 언어](#-사용-기술-및-언어-)
@@ -41,7 +43,7 @@
 
 <br>
 
-## [ 프로젝트 구조 ]
+### [ 프로젝트 구조 ]
 ```
 .
 │  .env.example                     # 환경변수 예시 파일
@@ -76,8 +78,8 @@
                 spreadsheet.py      # Google Sheets API 연동
 ```
 
-## [ 설치 방법 ]
-### 1️⃣ Python 패키지 설치
+### [ 설치 방법 ]
+#### 1️⃣ Python 패키지 설치
 ```bash
 pip install -r requirements.txt
 ```
@@ -92,21 +94,21 @@ google-api-python-client
 requests
 ```
 
-### 2️⃣ ChromeDriver 설치
+#### 2️⃣ ChromeDriver 설치
 1. Chrome 브라우저 버전 확인: `chrome://settings/help`
 2. [ChromeDriver 다운로드](https://chromedriver.chromium.org/downloads)
 3. `drivers/chromedriver.exe` 경로에 저장
 
 <br>
 
-## [ 환경 설정 ]
-### 1️⃣ 환경변수 파일 생성
+### [ 환경 설정 ]
+#### 1️⃣ 환경변수 파일 생성
 `.env.example`을 복사하여 `.env` 파일을 생성합니다.
 ```bash
 cp .env.example .env
 ```
 
-### 2️⃣ .env 파일 작성
+#### 2️⃣ .env 파일 작성
 ```env
 # DUC (교내 학생포털 로그인 정보)
 URL=https://pt.daelim.ac.kr
@@ -125,7 +127,7 @@ NOTION_TOKEN=your_notion_integration_token
 DB_ID=your_notion_database_id
 ```
 
-### 3️⃣ Google Sheets API 설정
+#### 3️⃣ Google Sheets API 설정
 1. [Google Cloud Console](https://console.cloud.google.com/)에서 프로젝트 생성
 2. Google Sheets API 활성화
 3. 서비스 계정 생성 및 JSON 키 다운로드
@@ -135,7 +137,7 @@ DB_ID=your_notion_database_id
 - 시트 이름: `AI시스템과`
 - 컬럼 구성: `도착일자 | URL | 이미지 | 협조전 제목 | 발신부서 | 기안자`
 
-### 4️⃣ Notion API 설정
+#### 4️⃣ Notion API 설정
 1. [Notion Developers](https://www.notion.so/my-integrations)에서 Integration 생성
 2. Internal Integration Token 복사
 3. Notion 데이터베이스 생성 후 Integration 연결
@@ -153,13 +155,13 @@ DB_ID=your_notion_database_id
 
 <br>
 
-## [ 사용 방법 ]
-### 프로그램 실행
+### [ 사용 방법 ]
+#### 프로그램 실행
 ```bash
 python main.py
 ```
 
-### 실행 과정
+#### 실행 과정
 1. 브라우저가 자동으로 열립니다.
 2. 교내 학생포털에 자동 로그인됩니다.
 3. 그룹웨어 수신접수함으로 이동합니다.
@@ -171,7 +173,7 @@ python main.py
 6. `Google Sheets`와 `Notion DB`에 데이터가 추가됩니다.
 7. 작업 완료 후 Enter 키를 누르면 브라우저가 종료됩니다.
 
-### 실행 예시
+#### 실행 예시
 ```
 💻 브라우저가 열렸습니다.
 ☑️ [진입] PortalMain 프레임
@@ -193,7 +195,7 @@ python main.py
 
 <br>
 
-## [ 동작 흐름 ]
+### [ 동작 흐름 ]
 ```
 1. 프로그램 진입점 (main.py)
    ↓
@@ -235,12 +237,12 @@ python main.py
 ```
 <br>
 
-## [ 문제 해결 ]
-### 1️⃣ 로그인이 안 될 때
+### [ 문제 해결 ]
+#### 1️⃣ 로그인이 안 될 때
 - `.env` 파일의 `USER_ID`와 `USER_PW`를 확인하세요.
 - 포털 사이트에서 직접 로그인이 되는지 확인하세요.
 
-### 2️⃣ ChromeDriver 오류
+#### 2️⃣ ChromeDriver 오류
 ```
 SessionNotCreatedException: session not created: This version of ChromeDriver only supports Chrome version XX
 ```
@@ -249,17 +251,17 @@ SessionNotCreatedException: session not created: This version of ChromeDriver on
 2. 동일한 버전의 ChromeDriver 다운로드
 3. `drivers/chromedriver.exe` 교체
 
-### 3️⃣ Google Sheets 연동 실패
+#### 3️⃣ Google Sheets 연동 실패
 - `credentials.json` 파일이 올바른 경로에 있는지 확인
 - 서비스 계정 이메일에 Google Sheets 편집 권한이 있는지 확인
 - `SPREADSHEET_ID`가 정확한지 확인
 
-### 4️⃣ Notion 연동 실패
+#### 4️⃣ Notion 연동 실패
 - `NOTION_TOKEN`이 올바른지 확인
 - Integration이 데이터베이스에 연결되어 있는지 확인
 - 데이터베이스 속성 이름이 정확히 일치하는지 확인
 
-### 5️⃣ 날짜 입력 오류
+#### 5️⃣ 날짜 입력 오류
 ```
 ❌ 잘못된 형식입니다. YYYY-MM-DD 형식으로 입력
 ```
@@ -269,7 +271,7 @@ SessionNotCreatedException: session not created: This version of ChromeDriver on
 
 <br>
 
-## [ 주의사항 ]
+### [ 주의사항 ]
 - 본 프로그램은 **개인 학습 및 업무 리스트업 목적**으로 제작되었습니다.
 - **학교 계정 정보**는 절대 공유하지 마십시오.
 - `.env` 파일과 `credentials.json` 파일은 Git에 커밋하지 마십시오.
